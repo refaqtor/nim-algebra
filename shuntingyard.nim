@@ -56,6 +56,8 @@ method parse(s: ShuntingYard) {.base.} =
           s.operators &= token
         else:
           s.operators &= token
+      else:
+        raise newException(SYError, "Unknown Operator " & token)
   for operator in reversed(s.operators): s.output &= operator
 
 proc shuntingYard*(e: string): string =
