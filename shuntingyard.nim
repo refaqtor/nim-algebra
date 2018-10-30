@@ -26,7 +26,7 @@ proc precedence(c: char): int =
     return OperatorTable[c][0]
   else: return -1
 
-method parse*(s: ShuntingYard) {.base.} =
+method parse(s: ShuntingYard) {.base.} =
   for token in s.expression:
     if token.isAlphaNumeric: s.output &= token
     elif token == '(': s.operators &= '('
