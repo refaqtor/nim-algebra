@@ -1,3 +1,3 @@
 import shuntingyard
 
-echo shuntingYard("3+4*2/(1-5)^2^3")
+echo shuntingYard("32+41*2/(1-5)^2^3")

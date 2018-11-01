@@ -38,7 +38,7 @@ method parse(s: ShuntingYard) {.base.} =
           found = true
           break
         else:
-          s.output &= operator
+          s.output &= ' ' & operator
           s.operators = s.operators[0..^2]
       if not found:
         raise newException(SYError, "Mismatched Parenthesis")
@@ -51,7 +51,7 @@ method parse(s: ShuntingYard) {.base.} =
             if s.operators[len(s.operators)-1] != '(' and newPrecedence < precedence(s.operators[len(s.operators)-1]) or
                 (newPrecedence == precedence(s.operators[len(s.operators)-1]) and
                 not OperatorTable[s.operators[len(s.operators)-1]][1]):
-              s.output &= s.operators[len(s.operators)-1]
+              s.output &= ' ' & s.operators[len(s.operators)-1]
               s.operators = s.operators[0..^2]
           s.operators &= token
           s.output &= ' '
@@ -60,7 +60,7 @@ method parse(s: ShuntingYard) {.base.} =
           s.output &= ' '
       else:
         raise newException(SYError, "Unknown Operator " & token)
-  for operator in reversed(s.operators): s.output &= operator
+  for operator in reversed(s.operators): s.output &= ' ' & operator
 
 proc shuntingYard*(e: string): string =
   var convert = ShuntingYard(expression: e)
