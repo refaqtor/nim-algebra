@@ -1,5 +1,8 @@
 import algebra
 
+echo evaluate(expr"1.5+1.5")
+#=> 3.0
+
 echo evaluate(expr"a/ln(b)", {"a": 5.5, "b": 2.2})
 #=> 6.975646720399666
 

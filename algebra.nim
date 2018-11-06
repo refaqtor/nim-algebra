@@ -98,7 +98,8 @@ proc expr*(expression: string): seq[string] =
     else: output.add($(operator))
   return output
 
-proc evaluate*(shunted: seq[string], variables: Table[string, float]): float =
+var emptyTable: Table[string, float]
+proc evaluate*(shunted: seq[string], variables: Table[string, float] = emptyTable): float =
   var valueStack: seq[float]
   for term in shunted:
     if allIt(term, it.isValue) and not term.isFunction:
