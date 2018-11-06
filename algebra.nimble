@@ -1,4 +1,4 @@
 version     = "0.1.0"
 author      = "ijneb"
-description = "Implemention of Shunting-Yard algorithm"
+description = "Algebraic Expression Parser and Evaluator"
 license     = "CC0"
