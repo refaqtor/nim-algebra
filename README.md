@@ -1,6 +1,4 @@
-# Algebraic Expression Parser & Evaluator
-
-This uses the Shunting-Yard algorithm to convert expressions with infixed operators to postfixed expressions, and then evaluates the expression.
+# Algebra Parser & Evaluator
 
 ## Example
 
