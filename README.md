@@ -16,4 +16,4 @@ echo evaluate(expr"sin(a)", "a", [0.0, 1.0, 2.0, 3.0, 4.0, 4.5])
 
 ## Parsing Details
 
-After a function name (e.g. sin, cos, ln, etc.), a left parenthesis `(` must immediately follow.
+After a function name (e.g. sin, cos, ln, etc.), a left parenthesis `(` must immediately follow. The `expr` procedure returns the tokens after the Shunting-Yard algorithm is applied.
