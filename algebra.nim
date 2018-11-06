@@ -7,7 +7,7 @@ import
 from algorithm import `reversed`
 
 type
-  SYError* = object of Exception
+  AlgError* = object of Exception
 
 const
   OperatorTable = {
@@ -64,7 +64,7 @@ proc expr*(expression: string): seq[string] =
           output.add($(operator))
           discard operators.pop
       if not found:
-        raise newException(SYError, "Mismatched Parenthesis")
+        raise newException(AlgError, "Mismatched Parenthesis")
     else:
       let newPrecedence = precedence($(token))
       if newPrecedence != -1:
@@ -78,7 +78,7 @@ proc expr*(expression: string): seq[string] =
           operators.add($(token))
         else: operators.add($(token))
       else:
-        raise newException(SYError, "Unknown Operator: " & token)
+        raise newException(AlgError, "Unknown Operator: " & token)
     if len(value) > 0:
       if count < len(expression)-1 and not expression[count+1].isValue and not value.isFunction:
         output.add(value)
@@ -91,10 +91,10 @@ proc expr*(expression: string): seq[string] =
           operators.add(value)
           value = ""
         else:
-          raise newException(SYError, "Missing opening parenthesis with function " & value)
+          raise newException(AlgError, "Missing opening parenthesis with function " & value)
     count += 1
   for operator in reversed(operators):
-    if operator == "(": raise newException(SYError, "Mismatched Parenthesis")
+    if operator == "(": raise newException(AlgError, "Mismatched Parenthesis")
     else: output.add($(operator))
   return output
 
@@ -107,7 +107,7 @@ proc evaluate*(shunted: seq[string], variables: Table[string, float] = emptyTabl
         if len(variables) > 0 and variables.hasKey(term):
           valueStack.add(variables[term])
         else:
-          raise newException(SYError, "Missing variable " & term)
+          raise newException(AlgError, "Missing variable " & term)
       else:
         valueStack.add(parseFloat(term))
     elif term.isFunction:
@@ -130,8 +130,8 @@ proc evaluate*(shunted: seq[string], variables: Table[string, float] = emptyTabl
       elif len(valueStack) == 1 and term == "+":
         valueStack.add(valueStack.pop)
       else:
-        raise newException(SYError, "Hanging Operator " & term)
-  if len(valueStack) > 1: raise newException(SYError, "Left over Operators")
+        raise newException(AlgError, "Hanging Operator " & term)
+  if len(valueStack) > 1: raise newException(AlgError, "Left over Operators")
   elif len(valueStack) == 1: return valueStack.pop
   elif len(valueStack) == 0: return 0
 
