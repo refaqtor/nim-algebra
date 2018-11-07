@@ -22,12 +22,22 @@ const
     "sin":    proc (n: float): float = sin(n),
     "cos":    proc (n: float): float = cos(n),
     "tan":    proc (n: float): float = tan(n),
+    "csc":    proc (n: float): float = csc(n),
+    "sec":    proc (n: float): float = sec(n),
+    "cot":    proc (n: float): float = cot(n),
+    "arcsin": proc (n: float): float = arcsin(n),
+    "arccos": proc (n: float): float = arccos(n),
+    "arctan": proc (n: float): float = arctan(n),
+    "arccsc": proc (n: float): float = arccsc(n),
+    "arcsec": proc (n: float): float = arcsec(n),
+    "arccot": proc (n: float): float = arccot(n),
     "ln":     proc (n: float): float = ln(n),
     "sqrt":   proc (n: float): float = sqrt(n),
     "abs":    proc (n: float): float = abs(n),
     "ceil":   proc (n: float): float = ceil(n),
     "floor":  proc (n: float): float = floor(n),
-    "gamma":  proc (n: float): float = gamma(n)
+    "gamma":  proc (n: float): float = gamma(n),
+    "round":  proc (n: float): float = round(n)
   }.toTable
 
 proc precedence(c: string): int =
