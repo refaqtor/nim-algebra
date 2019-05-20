@@ -113,7 +113,7 @@ proc evaluate*(shunted: seq[string], variables: Table[string, float] = emptyTabl
   var valueStack: seq[float]
   for term in shunted:
     if allIt(term, it.isValue) and not term.isFunction:
-      if term.isAlphaAscii:
+      if len(term) == 1 and Letters.contains(term[0]):
         if len(variables) > 0 and variables.hasKey(term):
           valueStack.add(variables[term])
         else:
@@ -145,12 +145,10 @@ proc evaluate*(shunted: seq[string], variables: Table[string, float] = emptyTabl
   elif len(valueStack) == 1: return valueStack.pop
   elif len(valueStack) == 0: return 0
 
-template evaluate*(shunted: seq[string], variables: openArray[(string, float)]): float =
-  mixin toTable
+proc evaluate*(shunted: seq[string], variables: openArray[(string, float)]): float =
   evaluate(shunted, variables.toTable)
 
-template evaluate*(shunted: seq[string], symbol: string, values: openArray[float]): seq[float] =
-  mixin toTable
+proc evaluate*(shunted: seq[string], symbol: string, values: openArray[float]): seq[float] =
   var results: seq[float]
   for v in values:
     results.add(evaluate(shunted, {symbol: v}.toTable))
